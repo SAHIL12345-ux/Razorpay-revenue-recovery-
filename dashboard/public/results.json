@@ -1,0 +1,38 @@
+[
+  {
+    "customer_name": "Rahul Sharma",
+    "amount": 499,
+    "failure_reason": "insufficient_funds",
+    "action_taken": "retry_later",
+    "outcome": {
+      "success": true,
+      "simulated": true,
+      "note": "Simulated: retry_later"
+    },
+    "timestamp": "2026-08-25T07:51:08.533Z"
+  },
+  {
+    "customer_name": "Priya Verma",
+    "amount": 999,
+    "failure_reason": "card_expired",
+    "action_taken": "send_payment_link",
+    "outcome": {
+      "success": true,
+      "link_url": "https://rzp.io/rzp/SasFTvt1",
+      "link_id": "plink_TTvV6BZJUSET7U"
+    },
+    "timestamp": "2026-08-25T07:51:12.022Z"
+  },
+  {
+    "customer_name": "Amit Singh",
+    "amount": 299,
+    "failure_reason": "bank_timeout",
+    "action_taken": "retry_now",
+    "outcome": {
+      "success": true,
+      "simulated": true,
+      "note": "Simulated: retry_now"
+    },
+    "timestamp": "2026-08-25T07:51:12.024Z"
+  }
+]
