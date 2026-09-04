@@ -1,6 +1,6 @@
 require('dotenv').config();
 const Razorpay = require('razorpay');
-
+const { hasReachedLimit, recordAttempt, getAttemptCount, MAX_ATTEMPTS } = require('./attemptTracker');
 const instance = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
   key_secret: process.env.RAZORPAY_KEY_SECRET,
@@ -21,6 +21,17 @@ function decideAction(failureReason) {
 }
 // STEP 4: ACT — real Razorpay Payment Link banao
 async function executeAction(payment, decision) {
+
+  if (hasReachedLimit(payment.subscription_id)) {
+    return {
+      success: false,
+      stopped: true,
+      reason: `Max attempts (${MAX_ATTEMPTS}) reached for this subscription. Escalating to human review.`,
+      attempts: getAttemptCount(payment.subscription_id),
+    };
+  }
+
+  const attemptNumber = recordAttempt(payment.subscription_id);
   if (decision.action === 'send_payment_link') {
     try {
       const link = await instance.paymentLink.create({
@@ -33,12 +44,12 @@ async function executeAction(payment, decision) {
         },
         notify: { sms: true, email: false },
       });
-      return { success: true, link_url: link.short_url, link_id: link.id };
+     return { success: true, link_url: link.short_url, link_id: link.id, attempts: attemptNumber };
     } catch (error) {
-      return { success: false, error: error.message || 'Unknown error' };
+      return { success: false, error: error.message || 'Unknown error', attempts: attemptNumber };
     }
   }
-   return { success: true, simulated: true, note: `Simulated: ${decision.action}` };
+   return { success: true, simulated: true, note: `Simulated: ${decision.action}` , attempts: attemptNumber };
 }
 
 module.exports = { instance, decideAction,executeAction };

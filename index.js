@@ -30,8 +30,9 @@ async function runAgent() {
     results.push(record);
 
     console.log(`${payment.customer_name} | ₹${record.amount} | ${payment.failure_reason} → ${decision.action}`);
+    if (outcome.stopped) console.log(`   🛑 STOPPED: ${outcome.reason}`);
     if (outcome.link_url) console.log(`   🔗 Payment link: ${outcome.link_url}`);
-    if (outcome.success === false) console.log(`   ❌ Failed: ${outcome.error}`);
+    if (outcome.success === false && !outcome.stopped) console.log(`   ❌ Failed: ${outcome.error}`);
   }
 
   // STEP 5: LOG — audit trail file mein save karo

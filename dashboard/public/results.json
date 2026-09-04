@@ -7,9 +7,10 @@
     "outcome": {
       "success": true,
       "simulated": true,
-      "note": "Simulated: retry_later"
+      "note": "Simulated: retry_later",
+      "attempts": 2
     },
-    "timestamp": "2026-08-25T07:51:08.533Z"
+    "timestamp": "2026-09-04T11:00:33.905Z"
   },
   {
     "customer_name": "Priya Verma",
@@ -18,10 +19,11 @@
     "action_taken": "send_payment_link",
     "outcome": {
       "success": true,
-      "link_url": "https://rzp.io/rzp/SasFTvt1",
-      "link_id": "plink_TTvV6BZJUSET7U"
+      "link_url": "https://rzp.io/rzp/hUHwc47S",
+      "link_id": "plink_TXw4Mg7hgi7sOW",
+      "attempts": 2
     },
-    "timestamp": "2026-08-25T07:51:12.022Z"
+    "timestamp": "2026-09-04T11:00:37.455Z"
   },
   {
     "customer_name": "Amit Singh",
@@ -31,8 +33,9 @@
     "outcome": {
       "success": true,
       "simulated": true,
-      "note": "Simulated: retry_now"
+      "note": "Simulated: retry_now",
+      "attempts": 2
     },
-    "timestamp": "2026-08-25T07:51:12.024Z"
+    "timestamp": "2026-09-04T11:00:37.462Z"
   }
 ]
